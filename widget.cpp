@@ -230,7 +230,7 @@ Widget::Widget(QWidget *parent)
 
 Widget::~Widget() {}*/
 
-
+/*
 #include "widget.h"
 #include <QCheckBox>
 #include <QButtonGroup>
@@ -263,5 +263,99 @@ void Widget::selectButton(int id)
 {
     bool checked = checkBox[id]->isChecked();
     qDebug() << "CheckBox" << id + 1 << (checked ? "checked" : "unchecked");
+}*/
+
+
+//3-15 수정전
+/*
+#include <QFormLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QValidator>
+
+#include "widget.h"
+
+Widget::Widget(QWidget* parent):QWidget(parent)
+{
+    QDoubleValidator* doubleValidator = new QDoubleValidator(this);
+
+    doubleValidator -> setBottom(10.0);
+    doubleValidator -> setTop(100.0);
+    doubleValidator -> setDecimals(3);
+
+    QIntValidator* intvalidator = new QIntValidator(this);
+
+    intValidator -> setBottom(13);
+    intValidator -> setTop(19);
+
+    QRegularExpression re("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
+    QRegularExpressionValidator* redExpValidator = new QRegularExpressionValidator(re,this);
+
+    QLineEdit* lineEditDouble = new QLineEdit(this);
+    lineEditDouble -> setValidator(doubleValidator);
+
+    QLineEdit* lineEditInt = new QLineEdit(this);
+    lineEditInt -> setValidator(doubleValidator);
+
+    QLineEdit* lineEditRegExp = new QLineEdit(this);
+    lineEditRegExp -> setValidator(doubleValidator);
+
+    QFormLayout* QFormLayout = new QFormLayout(this);
+    QFormLayout->addRow("&Double",lineEditDouble);
+    QFormLayout ->addRow("&int",lineEditInt);
+    QFormLayout ->addRow("&Regular Expression",lineEditRegExp);
+
+    setWindowTitle("validator");
 }
+
+Widget::~Widget(){}*/
+
+//3-15
+#include <QFormLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QValidator>
+#include <QRegularExpression>
+
+#include "widget.h"
+
+Widget::Widget(QWidget* parent) : QWidget(parent)
+{
+    // 실수 입력용 Validator (10.0 ~ 100.0, 소수점 3자리까지)
+    QDoubleValidator* doubleValidator = new QDoubleValidator(this);
+    doubleValidator->setBottom(10.0);
+    doubleValidator->setTop(100.0);
+    doubleValidator->setDecimals(3);
+
+    // 정수 입력용 Validator (13 ~ 19)
+    QIntValidator* intValidator = new QIntValidator(this);
+    intValidator->setBottom(13);
+    intValidator->setTop(19);
+
+    // 정규표현식 Validator (IP 주소 형태 예: 192.168.0.1)
+    QRegularExpression re("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
+    QRegularExpressionValidator* regExpValidator = new QRegularExpressionValidator(re, this);
+
+    // QLineEdit 설정
+    QLineEdit* lineEditDouble = new QLineEdit(this);
+    lineEditDouble->setValidator(doubleValidator);
+
+    QLineEdit* lineEditInt = new QLineEdit(this);
+    lineEditInt->setValidator(intValidator); // 정수용 Validator 적용
+
+    QLineEdit* lineEditRegExp = new QLineEdit(this);
+    lineEditRegExp->setValidator(regExpValidator); // 정규식 Validator 적용
+
+    // 폼 레이아웃 생성
+    QFormLayout* formLayout = new QFormLayout(this);
+    formLayout->addRow("&Double", lineEditDouble);
+    formLayout->addRow("&Int", lineEditInt);
+    formLayout->addRow("&IP Address", lineEditRegExp);
+
+    setWindowTitle("Validator Example");
+}
+
+Widget::~Widget() {}
+
+
 

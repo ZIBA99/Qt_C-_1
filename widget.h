@@ -64,6 +64,7 @@ private:
 #endif // WIDGET_H*/
 
 //3-7
+/*
 #ifndef WIDGET_H
 #define WIDGET_H
 
@@ -90,7 +91,7 @@ public slots:
 };
 
 #endif // WIDGET_H
-
+*/
 
 /*
 #ifndef WIDGET_H
@@ -115,3 +116,20 @@ private:
 
 #endif // WIDGET_H
 */
+
+//3-15
+#ifndef WIDGET_H
+#define WIDGET_H
+
+#include <QWidget>
+
+class Widget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    Widget(QWidget *parent = nullptr);
+    ~Widget();
+};
+
+#endif // WIDGET_H

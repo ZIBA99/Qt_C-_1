@@ -467,6 +467,7 @@ int main(int argc, char* argv[])
 }*/
 
 //3-11
+/*
 #include <QApplication>
 #include <QSpinBox>
 
@@ -490,5 +491,101 @@ int main(int argc, char* argv[])
     spinBox->show();
 
     return a.exec();
+}*/
+
+//3-12
+//QTimeEdit & QDateEdit 예제 전체 코드
+/*
+#include <QApplication>
+#include <QTimeEdit>
+#include <QDateEdit>
+#include <QVBoxLayout>
+#include <QWidget>
+
+int main(int argc, char* argv[])
+{
+    QApplication a(argc, argv);
+
+    // 메인 위젯 생성
+    QWidget window;
+    window.setWindowTitle("QTimeEdit & QDateEdit Example");
+
+    // 시간 편집 위젯
+    QTimeEdit* timeEdit = new QTimeEdit(QTime::currentTime());
+    timeEdit->setDisplayFormat("HH:mm:ss"); // 시간 포맷 설정
+
+    // 날짜 편집 위젯
+    QDateEdit* dateEdit = new QDateEdit(QDate::currentDate());
+    dateEdit->setDisplayFormat("yyyy-MM-dd"); // 날짜 포맷 설정
+    dateEdit->setCalendarPopup(true);         // 캘린더 팝업 사용
+
+    // 레이아웃 설정
+    QVBoxLayout* layout = new QVBoxLayout(&window);
+    layout->addWidget(timeEdit);
+    layout->addWidget(dateEdit);
+
+    // 화면에 표시
+    window.show();
+
+    return a.exec();
+}*/
+
+
+//3-13 echomode 속성
+/*
+#include <QApplication>
+#include <QLineEdit>
+#include <QCompleter>
+#include <QStringList>
+
+int main(int argc, char* argv[])
+{
+    QApplication a(argc, argv);
+
+    // QLineEdit 생성
+    QLineEdit *lineEdit = new QLineEdit();
+
+    // 자동완성에 사용할 문자열 리스트
+    QStringList CompletionList;
+    CompletionList << "Bryan" << "Bart" << "kelvin" << "Beth" << "Brad" << "kelly";
+
+    // QCompleter 생성 (두 번째 인자는 부모: lineEdit)
+    QCompleter *stringCompleter = new QCompleter(CompletionList, lineEdit);
+    stringCompleter->setCaseSensitivity(Qt::CaseInsensitive); // 대소문자 무시
+
+    // QLineEdit에 completer 연결
+    lineEdit->setCompleter(stringCompleter);
+
+    lineEdit->show();
+
+    return a.exec();
+}*/
+
+//3-14
+/*
+#include <QApplication>
+#include <QLineEdit>
+
+int main (int argc,char *argv[])
+{
+    QApplication a(argc,argv);
+
+    QLineEdit* lineEdit = new QLineEdit();
 }
+*/
+
+
+//3-15 정규표현
+#include <QApplication>
+#include "widget.h"
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    Widget w;
+    w.show();
+    return a.exec();
+}
+
+
 
